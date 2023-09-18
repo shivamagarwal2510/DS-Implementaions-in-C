@@ -1,0 +1,17 @@
+Producer
+do{
+    wait(empty); //wait until empty>0 then empty->value
+    wait(mutex);
+    //C.S. add data to buffer
+    signal(mutex);
+    signal(full); //increment full->value
+}while(1);
+
+Consumer
+do{
+    wait(full); wait until full>0, then full--;
+    wait(mutex);
+    //remove data from buffer
+    signal(mutex);
+    signal(empty); //increment empty
+}while(1);
