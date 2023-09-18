@@ -1,0 +1,8 @@
+do{
+    wait(fork[i]);
+    wait(fork[i+1]%5);
+    //eat 
+    signal(fork[i]);
+    signal(fork[i+1]%5);
+    //think
+}while(1);
