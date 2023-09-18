@@ -1,0 +1,24 @@
+Writer's solution
+do{
+    wait(wrt);
+    //do write operation
+    signal(wrt);
+}while(true);
+
+Reader's solution
+do{
+    wait(mutex); //to mutex readcount variable
+    rc++;
+    if(rc==1){
+        wait(wrt); //ensures no writer can enter even if there is one Reader
+    }
+    signal(mutex);
+    // C.S.: Reader is reading
+    wait(mutex);
+    rc--; // a reader leaves
+    if(rc==0) //no reader is left in C.S.
+    {
+        signal(wrt); //writer can enter
+    }
+    signal(mutex); //reader leaves
+}while(1);
